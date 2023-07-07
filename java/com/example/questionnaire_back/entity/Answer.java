@@ -23,18 +23,31 @@ public class Answer {
 	@Type(type = "uuid-char")
 	@Column(name = "questionnaire_id")
 	private UUID questionnaireId;
-	
+	@Type(type = "uuid-char")
 	@Column(name = "question_id")
-	private int questionId;
-	
+	private UUID questionId;
+
 	@Column(name = "participant_id")
 	private int participantId;
-	
+
 	@Column(name = "option_id")
 	private int optionId;
-	
+
 	@Column(name = "answer_text")
 	private String answerText;
+
+	public Answer() {
+		super();
+	}
+
+	public Answer(UUID questionnaireId, UUID questionId, int participantId, int optionId, String answerText) {
+		super();
+		this.questionnaireId = questionnaireId;
+		this.questionId = questionId;
+		this.participantId = participantId;
+		this.optionId = optionId;
+		this.answerText = answerText;
+	}
 
 	public int getAnswerId() {
 		return answerId;
@@ -52,11 +65,11 @@ public class Answer {
 		this.questionnaireId = questionnaireId;
 	}
 
-	public int getQuestionId() {
+	public UUID getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(int questionId) {
+	public void setQuestionId(UUID questionId) {
 		this.questionId = questionId;
 	}
 
@@ -83,7 +96,5 @@ public class Answer {
 	public void setAnswerText(String answerText) {
 		this.answerText = answerText;
 	}
-	
-	
-	
+
 }

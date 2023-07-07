@@ -1,8 +1,8 @@
 package com.example.questionnaire_back.constants;
 
 public enum RtnCode {
-	SUCCESS("200", "Success!"), // 帶參數回傳成功
-	SUCCESSFUL("204", "Successful!"), // 不帶參數回傳成功
+	SUCCESS("200", "成功した"), // 帶參數回傳成功
+	SUCCESSFUL("204", "成功した"), // 不帶參數回傳成功
 	CANNOT_EMPTY("400", "入力が空です"), 
 	INCORRECT("401", " 正しくないリクエストです!"),
 	CONFLICT("401", " Request conflicts!"), 

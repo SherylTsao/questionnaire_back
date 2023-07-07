@@ -10,8 +10,16 @@ import org.springframework.stereotype.Repository;
 
 import com.example.questionnaire_back.entity.Qoption;
 
+
 @Transactional
 @Repository
 public interface QoptionDao extends JpaRepository<Qoption, Integer> {
+	
+	
 	public void deleteByQuestionIdIn(List<UUID> uuidList);
+	
+	/*
+	 * 找多筆問題ID(後台)
+	 */
+	public List<Qoption> findByQuestionIdIn(List<UUID> uuidList);
 }

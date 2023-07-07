@@ -4,10 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.questionnaire_back.entity.Answer;
+
 public class QueRequest {
 
 	// 屬性
-//	private int questionId;
+//  -----
+	private String questionaireId;
+	private String questionId;
+//  -----	
 	private int optionId;
 	private String answerText;
 	private LocalDateTime filling_time;
@@ -26,13 +31,26 @@ public class QueRequest {
 	private String gender;
 	private String address;
 	private String phone;
+	private int participantId;
 //		---
-	private String questionId;
 	private List<QuestionAndQoptionsVo> questionAndQoptionsVoList;
+	private List<String> questionnaire;
+	private List<String> question;
+	private List<Integer> optionList;
+	private List<Answer> answers;
 
 	// getters & setters
+
 	public String getQuestionId() {
 		return questionId;
+	}
+
+	public String getQuestionaireId() {
+		return questionaireId;
+	}
+
+	public void setQuestionaireId(String questionaireId) {
+		this.questionaireId = questionaireId;
 	}
 
 	public void setQuestionId(String questionId) {
@@ -189,6 +207,46 @@ public class QueRequest {
 
 	public void setQuestionAndQoptionsVoList(List<QuestionAndQoptionsVo> questionAndQoptionsVoList) {
 		this.questionAndQoptionsVoList = questionAndQoptionsVoList;
+	}
+
+	public List<String> getQuestionnaire() {
+		return questionnaire;
+	}
+
+	public void setQuestionnaire(List<String> questionnaire) {
+		this.questionnaire = questionnaire;
+	}
+
+	public List<String> getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(List<String> question) {
+		this.question = question;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public List<Integer> getOptionList() {
+		return optionList;
+	}
+
+	public void setOptionList(List<Integer> optionList) {
+		this.optionList = optionList;
+	}
+
+	public int getParticipantId() {
+		return participantId;
+	}
+
+	public void setParticipantId(int participantId) {
+		this.participantId = participantId;
 	}
 
 }

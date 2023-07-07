@@ -48,6 +48,12 @@ public class QuestionaireController {
 		return queService.filloutReport(request);
 		// 連結內部
 	}
+	
+	@PostMapping(value = "show_write_time") // 連結外部
+	public QueResponse showWriteTime(@RequestBody QueRequest request) {
+		return queService.showWriteTime(request);
+		// 連結內部
+	}
 
 	@PostMapping(value = "show_report") // 連結外部
 	public QueResponse showReport(@RequestBody QueRequest request) {
@@ -57,6 +63,11 @@ public class QuestionaireController {
 	@PostMapping(value = "show_all_report") // 連結外部
 	public QueResponse showAllReport(@RequestBody QueRequest request) {
 		return queService.showAllReport(request);
+		// 連結內部
+	}
+	@PostMapping(value = "showQuestionnaireInfo") // 連結外部
+	public QueResponse showQuestionnaireInfo(@RequestBody QueRequest request) {
+		return queService.showQuestionnaireInfo(request);
 		// 連結內部
 	}
 }

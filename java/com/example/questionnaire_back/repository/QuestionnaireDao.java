@@ -13,11 +13,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.questionnaire_back.entity.Questionnaire;
-
+@Transactional
 @Repository
-public interface QuestionaireDao extends JpaRepository<Questionnaire, UUID> {
+public interface QuestionnaireDao extends JpaRepository<Questionnaire, UUID> {
 	/*
-	 * 新增資料
+	 * 新增問卷
 	 */
 	@Transactional
 	@Modifying
@@ -25,6 +25,17 @@ public interface QuestionaireDao extends JpaRepository<Questionnaire, UUID> {
 	public int insertProject(@Param("questionnaireId") String questionnaireId, @Param("title") String title,
 			@Param("description") String description, @Param("createdAt") LocalDateTime createdAt,
 			@Param("startAt") LocalDate startAt, @Param("endAt") LocalDate endAt);
+	
+	/*
+	 * 完成問卷
+	 */
+	@Transactional
+	@Modifying
+	@Query(value = "update questionnaire set title = :title, description = :description, created_at = :createdAt, start_at = :startAt, end_at = :endAt "
+			+ "where questionnaire_id = :questionnaireId", nativeQuery = true)
+	public int updateInfo(@Param("questionnaireId") String questionnaireId, @Param("title") String title, @Param("description") String description,
+			@Param("createdAt") LocalDateTime createdAt, @Param("startAt") LocalDate startAt,
+			@Param("endAt") LocalDate endAt);
 
 	/*
 	 * 尋找問卷資訊(前台)
@@ -34,5 +45,19 @@ public interface QuestionaireDao extends JpaRepository<Questionnaire, UUID> {
 			+ "order by created_at desc", nativeQuery = true)
 	public List<Questionnaire> searchProjectsByCreatedAtDesc(@Param("title") String title,
 			@Param("startAt") LocalDate startAt, @Param("endAt") LocalDate endAt);
+	
+	/*
+	 * 尋找問卷資訊(前台)
+	 */
+	@Query(value = "select * from questionnaire "
+			+ "where questionnaire_id :questionnaireId"
+			, nativeQuery = true)
+	public List<Questionnaire> searchProjectsByQuestionnaireId(@Param("questionnaireId") String questionnaireId);
+	
+	
+	/*
+	 * 刪除多筆問卷(後台)
+	 */
+	public void deleteByQuestionnaireIdIn(List<UUID> uuidList);
 
 }
