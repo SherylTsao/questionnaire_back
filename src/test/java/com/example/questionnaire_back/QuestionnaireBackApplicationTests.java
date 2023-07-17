@@ -26,10 +26,10 @@ class QuestionnaireBackApplicationTests {
 	@Test
 	void add() {
 		QueRequest req = new QueRequest();
-		req.setTitle("第七份標題");
+		req.setTitle("測試標題0709");
 		req.setDescription("第一份描述");
-		req.setStartAt(LocalDate.of(2023, 3, 02));
-		req.setEndAt(LocalDate.of(2023, 3, 07));
+//		req.setStartAt(LocalDate.of(2023, 3, 02));
+//		req.setEndAt(LocalDate.of(2023, 3, 07));
 		QuestionAndQoptionsVo vo1 = new QuestionAndQoptionsVo("肚子餓要吃什麼", "單", true, "漢堡;三明治");
 		QuestionAndQoptionsVo vo2 = new QuestionAndQoptionsVo("口渴要喝什麼", "多", false, "水");
 		List<QuestionAndQoptionsVo> voList = new ArrayList<>();
@@ -93,17 +93,17 @@ class QuestionnaireBackApplicationTests {
 	@Test
 	void filloutReport() {
 		QueRequest req = new QueRequest();
-		req.setName("d");
+		req.setName("k");
 		req.setAddress("高雄市");
 		req.setAge(23);
 		req.setEmail("a0973038822@gmail.com");
 		req.setPhone("0973038822");
 		req.setGender("男");
-		req.setQuestionaireId("527f5625-efd2-4cb9-9793-550ad27f01cf");
+		req.setQuestionaireId("0658a317-a59d-402a-a839-81553bd4cb56");
 		List<Integer> opList = new ArrayList<>();
-		opList.add(90);
-		opList.add(91);
-		opList.add(92);
+		opList.add(377);
+		opList.add(379);
+//		opList.add(92);
 		req.setOptionList(opList);
 		QueResponse res = queService.filloutReport(req);
 		System.out.println(res.getMessage());
@@ -113,12 +113,12 @@ class QuestionnaireBackApplicationTests {
 	@Test
 	void showReport() {
 		QueRequest req = new QueRequest();
-		req.setParticipantId(5);
-		req.setQuestionaireId("527f5625-efd2-4cb9-9793-550ad27f01cf");
+//		req.setParticipantId(9);
+		req.setQuestionaireId("0658a317-a59d-402a-a839-81553bd4cb56");
 		QueResponse res = queService.showReport(req);
 //		個人資訊
-		Respondents resp = res.getRespondents();
-		System.out.println(resp.getName() + " 名子");
+//		Respondents resp = res.getRespondents();
+//		System.out.println(resp.getName() + " 名子");
 		List<Integer> intList = new ArrayList<>();
 //		蒐集起來 用於contains 有包含到代表有選
 		for (var itemAns : res.getAnswerList()) {

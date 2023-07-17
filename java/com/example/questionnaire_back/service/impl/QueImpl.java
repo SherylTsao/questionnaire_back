@@ -163,7 +163,12 @@ public class QueImpl implements QueService {
 		 * 1.將REQ問卷表的UUID從String型態變成UUID(因為資料庫的型態是VERCHAR) 再利用UUID從資料庫找到該筆問卷資訊
 		 */
 		UUID uuid = UUID.fromString(queRequest.getQuestionaireId());
+
 		Optional<Questionnaire> queList = questionnaireDao.findById(uuid);
+
+		if (!filloutDao.findByQuestionnaireId(uuid).isEmpty()) {
+			return new QueResponse(RtnCode.INCORRECT.getMessage());
+		}
 
 		/*
 		 * 2.三元運算式判斷是否有修改REQ
@@ -321,6 +326,7 @@ public class QueImpl implements QueService {
 	public QueResponse filloutReport(QueRequest queRequest) {
 
 		/*
+		 * 使用者填寫問卷
 		 * 1.填寫者的基本資訊防呆:姓名、Email(須符合格式)、年齡(數字)、性別、地址、電話號碼(數字10碼) 2.存入(addInfo)方法
 		 */
 		if (!StringUtils.hasText(queRequest.getName()) || !StringUtils.hasText(queRequest.getEmail())
@@ -398,10 +404,12 @@ public class QueImpl implements QueService {
 		Respondents respondents = new Respondents();
 		UUID uuid = UUID.fromString(queRequest.getQuestionaireId());
 		Questionnaire questionnaire = questionnaireDao.findById(uuid).get();
+//		前台要的
 		if (queRequest.getParticipantId() != 0) {
 			respondents = respondentsDao.findById(queRequest.getParticipantId()).get();
 			ansList = answerDao.findByParticipantId(queRequest.getParticipantId());
 		}
+//		前台要的
 //		翻她回答的list
 		List<Question> questionList = questionDao.searchProjectsByQuestionnaireId(queRequest.getQuestionaireId());
 		List<UUID> uuidList = new ArrayList<>();
@@ -409,7 +417,8 @@ public class QueImpl implements QueService {
 			uuidList.add(item.getQuestionId());
 		}
 		List<Qoption> qoptionList = qoptionDao.findByQuestionIdIn(uuidList);
-		return new QueResponse(questionnaire,respondents, ansList, qoptionList, questionList, RtnCode.SUCCESSFUL.getMessage());
+		return new QueResponse(questionnaire, respondents, ansList, qoptionList, questionList,
+				RtnCode.SUCCESSFUL.getMessage());
 	}
 
 //統計
